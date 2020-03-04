@@ -17,4 +17,36 @@ class API {
   getAllGenres = async () => {
     return await axios.get(BASE_URL + "/genres");
   };
+
+  getRandomEpisodeObj = async () => {
+    return await axios.get(BASE_URL + "/just-listen");
+  };
+
+  getSearchResults = async searchQuery => {
+    return await axios.get(BASE_URL + "/search/" + searchQuery);
+  };
+
+  getTypeaheadResults = async searchQuery => {
+    return await axios.get(BASE_URL + "/typeahead/" + searchQuery);
+  };
+
+  getOnePodcast = async podcastID => {
+    return await axios.get(BASE_URL + `podcast/${podcastID}`);
+  };
+
+  getOneEpisode = async episodeID => {
+    return await axios.get(BASE_URL + `episodes/${episodeID}`);
+  };
+
+  getBestPodcast = async searchQuery => {
+    return await axios.get(BASE_URL + "/best_podcasts/" + searchQuery);
+  };
+
+  getPodcastRecommendation = async id => {
+    return await axios.get(BASE_URL + `/podcasts/${id}/recommendations`);
+  };
+
+  getEpisodesRecommendation = async id => {
+    return await axios.get(BASE_URL + `/episodes/${id}/recommendations`);
+  };
 }
