@@ -3,51 +3,51 @@ require("dotenv").config();
 
 class API {
   constructor() {
-    APIkey = process.env.API_KEY;
-    headers = {
-      "X-ListenAPI-Key": "APIKey"
-    };
-    BASE_URL = "https://listen-api.listennotes.com/api/v2";
+    this.api = axios.create({
+      baseURL: process.env.API_BASE_URL,
+      withCredentials: true,
+      headers: { "X-ListenAPI-Key": process.env.API_KEY }
+    });
   }
 
   getAllLangs = async () => {
-    return await axios.get(BASE_URL + "/languages");
+    return await this.api.get("/languages");
   };
 
   getAllGenres = async () => {
-    return await axios.get(BASE_URL + "/genres");
+    return await this.api.get("/genres");
   };
 
   getRandomEpisodeObj = async () => {
-    return await axios.get(BASE_URL + "/just-listen");
+    return await this.api.get("/just-listen");
   };
 
   getSearchResults = async searchQuery => {
-    return await axios.get(BASE_URL + "/search/" + searchQuery);
+    return await this.api.get(`/search/${searchQuery}`);
   };
 
   getTypeaheadResults = async searchQuery => {
-    return await axios.get(BASE_URL + "/typeahead/" + searchQuery);
+    return await this.api.get(`/typeahead/${searchQuery}`);
   };
 
   getOnePodcast = async podcastID => {
-    return await axios.get(BASE_URL + `podcast/${podcastID}`);
+    return await this.api.get(`podcast/${podcastID}`);
   };
 
   getOneEpisode = async episodeID => {
-    return await axios.get(BASE_URL + `episodes/${episodeID}`);
+    return await this.api.get(`episodes/${episodeID}`);
   };
 
   getBestPodcast = async searchQuery => {
-    return await axios.get(BASE_URL + "/best_podcasts/" + searchQuery);
+    return await axios.get(`/best_podcasts/${searchQuery}`);
   };
 
   getPodcastRecommendation = async id => {
-    return await axios.get(BASE_URL + `/podcasts/${id}/recommendations`);
+    return await axios.get(`/podcasts/${id}/recommendations`);
   };
 
   getEpisodesRecommendation = async id => {
-    return await axios.get(BASE_URL + `/episodes/${id}/recommendations`);
+    return await axios.get(`/episodes/${id}/recommendations`);
   };
 }
 
