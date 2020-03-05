@@ -4,7 +4,7 @@ require("dotenv").config();
 class ListenedEpisode {
   constructor() {
     this.listenedEpisode = axios.create({
-      baseURL: `${process.env.BACKEND_DEV}/listenedEpisode`,
+      baseURL: `${process.env.REACT_APP_BACKEND_DEV}/listenedEpisode`,
       withCredentials: true
     });
   }

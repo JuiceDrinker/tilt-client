@@ -4,50 +4,51 @@ require("dotenv").config();
 class API {
   constructor() {
     this.api = axios.create({
-      baseURL: process.env.API_BASE_URL,
-      withCredentials: true,
-      headers: { "X-ListenAPI-Key": process.env.API_KEY }
+      baseURL: "https://listen-api.listennotes.com/api/v2",
+      headers: {
+        get: { "X-ListenAPI-Key": process.env.REACT_APP_API_KEY }
+      }
     });
   }
 
-  getAllLangs = async () => {
-    return await this.api.get("/languages");
+  getAllLangs = () => {
+    return this.api.get("/languages");
   };
 
-  getAllGenres = async () => {
-    return await this.api.get("/genres");
+  getAllGenres = () => {
+    return this.api.get("/genres");
   };
 
-  getRandomEpisodeObj = async () => {
-    return await this.api.get("/just-listen");
+  getRandomEpisodeObj = () => {
+    return this.api.get("/just_listen");
   };
 
-  getSearchResults = async searchQuery => {
-    return await this.api.get(`/search/${searchQuery}`);
+  getSearchResults = searchQuery => {
+    return this.api.get(`/search/${searchQuery}`);
   };
 
-  getTypeaheadResults = async searchQuery => {
-    return await this.api.get(`/typeahead/${searchQuery}`);
+  getTypeaheadResults = searchQuery => {
+    return this.api.get(`/typeahead/${searchQuery}`);
   };
 
-  getOnePodcast = async podcastID => {
-    return await this.api.get(`podcast/${podcastID}`);
+  getOnePodcast = podcastID => {
+    return this.api.get(`podcast/${podcastID}`);
   };
 
-  getOneEpisode = async episodeID => {
-    return await this.api.get(`episodes/${episodeID}`);
+  getOneEpisode = episodeID => {
+    return this.api.get(`episodes/${episodeID}`);
   };
 
-  getBestPodcast = async searchQuery => {
-    return await this.api.get(`/best_podcasts/${searchQuery}`);
+  getBestPodcast = searchQuery => {
+    return this.api.get(`/best_podcasts/${searchQuery}`);
   };
 
-  getPodcastRecommendation = async id => {
-    return await this.api.get(`/podcasts/${id}/recommendations`);
+  getPodcastRecommendation = id => {
+    return this.api.get(`/podcasts/${id}/recommendations`);
   };
 
-  getEpisodesRecommendation = async id => {
-    return await this.api.get(`/episodes/${id}/recommendations`);
+  getEpisodesRecommendation = id => {
+    return this.api.get(`/episodes/${id}/recommendations`);
   };
 }
 

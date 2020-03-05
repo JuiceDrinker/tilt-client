@@ -4,7 +4,7 @@ require("dotenv").config();
 class User {
   constructor() {
     this.user = axios.create({
-      baseURL: `${process.env.BACKEND_DEV}/user`,
+      baseURL: `${process.env.REACT_APP_BACKEND_DEV}/user`,
       withCredentials: true
     });
   }
