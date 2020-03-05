@@ -1,11 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Seearch extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
+    state= {
+        
     }
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="searchBar"
+          placeholder="Search for your favourite podcasts"
+        />
+        <button>Search</button>
+      </div>
+    );
+  }
 }
