@@ -50,3 +50,7 @@ class API {
     return await axios.get(BASE_URL + `/episodes/${id}/recommendations`);
   };
 }
+
+const APIservices = new API();
+
+export default APIservices;
