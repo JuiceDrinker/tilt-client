@@ -39,15 +39,15 @@ class API {
   };
 
   getBestPodcast = async searchQuery => {
-    return await axios.get(`/best_podcasts/${searchQuery}`);
+    return await this.api.get(`/best_podcasts/${searchQuery}`);
   };
 
   getPodcastRecommendation = async id => {
-    return await axios.get(`/podcasts/${id}/recommendations`);
+    return await this.api.get(`/podcasts/${id}/recommendations`);
   };
 
   getEpisodesRecommendation = async id => {
-    return await axios.get(`/episodes/${id}/recommendations`);
+    return await this.api.get(`/episodes/${id}/recommendations`);
   };
 }
 
