@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withAuth } from "./../lib/Auth";
-import APIservices from "./../lib/api-services";
 
 class Private extends Component {
   render() {
