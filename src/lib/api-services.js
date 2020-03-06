@@ -24,7 +24,7 @@ class API {
   };
 
   getSearchResults = searchQuery => {
-    return this.api.get(`/search/${searchQuery}`);
+    return this.api.get(`/search?q=${searchQuery}`);
   };
 
   getTypeaheadResults = searchQuery => {

@@ -13,17 +13,29 @@ import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showIndex: false,
+      showResults: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ showIndex: true });
+  }
+
+  toggleIndex = () => this.setState({ showIndex: true });
+
   render() {
     return (
       <div className="container">
         <Navbar />
 
         <Switch>
-          <Route exact path="/" component={Index} />
-
           <AnonRoute exact path="/signup" component={Signup} />
           <AnonRoute exact path="/login" component={Login} />
-
+          showIndex ? <PrivateRoute exact path="/" component={Index} /> : null
           <PrivateRoute exact path="/private" component={Private} />
         </Switch>
       </div>
