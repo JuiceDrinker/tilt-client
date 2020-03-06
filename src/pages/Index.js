@@ -6,7 +6,7 @@ export default class Index extends Component {
   constructor() {
     super();
     this.state = {
-      searchData: {},
+      searchData: [],
       isQueryRecieved: false
     };
   }
@@ -14,16 +14,21 @@ export default class Index extends Component {
   getSearchData = data => {
     this.setState({ searchData: data.results, isQueryRecieved: true });
   };
+
   componentDidMount() {
     API.getBestPodcast("")
       .then(result => {
-        const data = result.data;
+        const data = result.data.podcasts;
         this.setState({ searchData: data });
       })
-      .catch(err => {});
+      .catch(err => {
+        console.log("err :", err);
+      });
   }
 
   render() {
+    console.log('this.state.searchData :', this.state.searchData);
+    
     return (
       <div>
         <Search returnData={this.getSearchData} />
