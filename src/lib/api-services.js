@@ -32,7 +32,7 @@ class API {
   };
 
   getOnePodcast = podcastID => {
-    return this.api.get(`podcast/${podcastID}`);
+    return this.api.get(`podcasts/${podcastID}`);
   };
 
   getOneEpisode = episodeID => {

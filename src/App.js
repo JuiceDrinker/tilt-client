@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Private from "./pages/Private";
 import Index from "./pages/Index";
+import PodcastResult from "./pages/PodcastResult";
 
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
@@ -25,6 +25,11 @@ class App extends Component {
           <AnonRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Index} />
           <PrivateRoute exact path="/private" component={Private} />
+          <PrivateRoute
+            exact
+            path="/podcastResult/:id"
+            component={PodcastResult}
+          />
         </Switch>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API from "./../lib/api-services";
+import { Link } from "react-router-dom";
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,11 @@ export default class Recommended extends Component {
     return (
       <div>
         {this.state.dataToRender.map(podcastObj => {
-          return <img src={podcastObj.image} alt="" width="200" height="200" />;
+          return (
+            <Link to={`/podcastResult/${podcastObj.id}`}>
+              <img src={podcastObj.image} alt="" width="200" height="200" />
+            </Link>
+          );
         })}
       </div>
     );
