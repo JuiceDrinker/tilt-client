@@ -2,6 +2,7 @@ import API from "../lib/api-services";
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Episodes from "./../components/Episodes";
 
 export default class PodcastResult extends Component {
   state = {
@@ -14,6 +15,7 @@ export default class PodcastResult extends Component {
       .then(result => {
         const podcastObj = result.data;
         this.setState({ podcastObj: podcastObj });
+        console.log("this.state", this.state);
       })
       .catch(err => {
         console.log("err :", err);
@@ -25,11 +27,11 @@ export default class PodcastResult extends Component {
         <h1>{this.state.podcastObj.title}</h1>
         <img src={this.state.podcastObj.image} alt="" />
         {this.state.podcastObj.description}
-        {this.state.podcastObj.episodes.map(episodeObj => (
-          <Link to={`episode/${episodeObj.id}`}>
-            <img src={episodeObj.image} alt="" />
-          </Link>
-        ))}
+        {this.state.podcastObj.episodes
+          ? this.state.podcastObj.episodes.map(e => {
+              return <Episodes episodeObj={e} key={e.id} />;
+            })
+          : null}
       </div>
     );
   }

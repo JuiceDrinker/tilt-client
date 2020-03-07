@@ -31,7 +31,6 @@ export default class Search extends Component {
     API.getSearchResults(formQuery)
       .then(results => results.data)
       .then(data => {
-        console.log("data :", data);
         this.setQueryResult(data);
       })
       .catch(err => console.log("err", err));

@@ -27,8 +27,6 @@ export default class Index extends Component {
   }
 
   render() {
-    console.log('this.state.searchData :', this.state.searchData);
-    
     return (
       <div>
         <Search returnData={this.getSearchData} />

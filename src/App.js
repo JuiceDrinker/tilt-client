@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Private from "./pages/Private";
 import Index from "./pages/Index";
 import PodcastResult from "./pages/PodcastResult";
+import EpisodeResult from "./pages/EpisodeResult";
 
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
@@ -29,6 +30,11 @@ class App extends Component {
             exact
             path="/podcastResult/:id"
             component={PodcastResult}
+          />
+          <PrivateRoute
+            exact
+            path="/podcastResult/"
+            component={EpisodeResult}
           />
         </Switch>
       </div>
