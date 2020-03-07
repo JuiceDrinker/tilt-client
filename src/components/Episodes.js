@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { convertSecondsToDisplay } from "./../lib/helpers";
-
+import { Link } from "react-router-dom";
 export default class Episodes extends Component {
   state = {
     episodeObj: {},
@@ -14,13 +14,15 @@ export default class Episodes extends Component {
   }
 
   render() {
-    return (
+    return this.state.episodeObj ? (
       <div>
-        <img src={this.state.episodeObj.image} alt="" />
+        <Link to={`/episode/${this.state.episodeObj.id}`}>
+          <img src={this.state.episodeObj.image} alt="" />
+        </Link>
         {this.state.episodeObj.description}
         <br />
         <p>Run Time: {this.state.runTime}</p>
       </div>
-    );
+    ) : null;
   }
 }

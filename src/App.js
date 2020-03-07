@@ -31,11 +31,7 @@ class App extends Component {
             path="/podcastResult/:id"
             component={PodcastResult}
           />
-          <PrivateRoute
-            exact
-            path="/podcastResult/"
-            component={EpisodeResult}
-          />
+          <PrivateRoute exact path="/episode/:id" component={EpisodeResult} />
         </Switch>
       </div>
     );
