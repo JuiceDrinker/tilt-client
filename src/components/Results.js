@@ -23,7 +23,10 @@ export default class Recommended extends Component {
       <div>
         {this.state.dataToRender.map(podcastObj => {
           return (
-            <Link to={`/podcastResult/${podcastObj.id}`}>
+            <Link
+              key={`${podcastObj.id}`}
+              to={`/podcastResult/${podcastObj.id}`}
+            >
               <img src={podcastObj.image} alt="" width="200" height="200" />
             </Link>
           );
