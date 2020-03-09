@@ -22,4 +22,4 @@ class ListenedEpisode {
 
 const listenedEpisodeServices = new ListenedEpisode();
 
-module.exports = listenedEpisodeServices;
+export default listenedEpisodeServices;

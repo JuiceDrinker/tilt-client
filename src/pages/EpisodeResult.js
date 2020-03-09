@@ -4,6 +4,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { convertSecondsToDisplay } from "./../lib/helpers";
 import parse from "html-react-parser";
+import listenedEpisodeServices from "./../lib/listenedEpisodes-services";
 export default class EpisodeResult extends Component {
   state = {
     id: null,
@@ -12,6 +13,10 @@ export default class EpisodeResult extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+    this.setState((state, props) => {
+      return { id: id };
+    });
+
     API.getOneEpisode(id)
       .then(result => {
         const episode = result.data;
@@ -22,16 +27,22 @@ export default class EpisodeResult extends Component {
         console.log("err", err);
       });
   }
-  runTime = e => {
-    console.log("currentTIme", e);
+  saveToUser = () => {
+    listenedEpisodeServices.setNewListenedEpisode(this.state.id);
   };
-
+  updateProgress = e => {
+    listenedEpisodeServices.setEpisodeProgress(
+      this.state.id,
+      e.target.currentTime
+    );
+  };
   Player = () => {
     return (
       <AudioPlayer
         src={this.state.episodeObj.audio}
         showSkipControls
-        onPause={this.runTime}
+        onPlay={this.saveToUser}
+        onPause={this.updateProgress}
       />
     );
   };
