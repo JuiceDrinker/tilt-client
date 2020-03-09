@@ -4,7 +4,7 @@ require("dotenv").config();
 class ListenedEpisode {
   constructor() {
     this.listenedEpisode = axios.create({
-      baseURL: `${process.env.REACT_APP_BACKEND_DEV}/listenedEpisode`,
+      baseURL: `${process.env.REACT_APP_API_URL}/listenedEpisode`,
       withCredentials: true
     });
   }
@@ -14,8 +14,9 @@ class ListenedEpisode {
   };
 
   setEpisodeProgress = async (episodeID, progress) => {
-    return await this.listenedEpisode.put(`/${episodeID}`, {
-      progress: progress
+    return await this.listenedEpisode.put(`/`, {
+      progress: progress,
+      id: episodeID
     });
   };
 }
