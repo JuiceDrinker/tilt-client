@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, cloneElement } from "react";
 import API from "./../lib/api-services";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { convertSecondsToDisplay } from "./../lib/helpers";
 import parse from "html-react-parser";
 import listenedEpisodeServices from "./../lib/listenedEpisodes-services";
+import authService from "./../lib/auth-service";
 export default class EpisodeResult extends Component {
   state = {
     id: null,
@@ -35,6 +36,14 @@ export default class EpisodeResult extends Component {
       this.state.id,
       e.target.currentTime
     );
+    authService
+      .me()
+      .then(result => {
+        console.log("result :", result);
+      })
+      .catch(err => {
+        console.log("err :", err);
+      });
   };
 
   Player = () => {
