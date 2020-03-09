@@ -1,7 +1,7 @@
 import API from "../lib/api-services";
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import Episodes from "./../components/Episodes";
 
 export default class PodcastResult extends Component {
@@ -15,7 +15,6 @@ export default class PodcastResult extends Component {
       .then(result => {
         const podcastObj = result.data;
         this.setState({ podcastObj: podcastObj });
-        console.log("this.state", this.state);
       })
       .catch(err => {
         console.log("err :", err);

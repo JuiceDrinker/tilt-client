@@ -9,3 +9,4 @@ module.exports.convertSecondsToDisplay = timeInSeconds => {
 
   return `${hours}:${mins}:${secs}`;
 };
+

@@ -3,7 +3,9 @@ import API from "./../lib/api-services";
 export default class Search extends Component {
   state = {
     searchQuery: "",
-    sortByDate: false
+    type: "podcast",
+    sortByDate: false,
+    type: ""
     // includedGenres: [23 ,62 ,34],
   };
 
@@ -11,6 +13,7 @@ export default class Search extends Component {
     const { returnData } = this.props;
     returnData(data);
   };
+
   handleChange = e => {
     const newVal = e.target.value;
     this.setState((state, props) => {
@@ -27,7 +30,9 @@ export default class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const formQuery = this.state.searchQuery.replace(" ", "%20");
+    const formQuery = this.state.searchQuery
+      .replace(" ", "%20")
+      .concat(`&type=${this.state.type}`);
     API.getSearchResults(formQuery)
       .then(results => results.data)
       .then(data => {
