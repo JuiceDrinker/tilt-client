@@ -36,6 +36,8 @@ export default class EpisodeResult extends Component {
       e.target.currentTime
     );
   };
+
+  adi = 'me';
   Player = () => {
     return (
       <AudioPlayer
