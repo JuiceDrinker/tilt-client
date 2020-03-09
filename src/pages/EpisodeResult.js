@@ -3,8 +3,8 @@ import API from "./../lib/api-services";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { convertSecondsToDisplay } from "./../lib/helpers";
+import parse from "html-react-parser";
 export default class EpisodeResult extends Component {
-  
   state = {
     id: null,
     episodeObj: {}
@@ -22,17 +22,31 @@ export default class EpisodeResult extends Component {
         console.log("err", err);
       });
   }
+  runTime = e => {
+    console.log("currentTIme", e);
+  };
 
   Player = () => {
-    return <AudioPlayer src={this.state.episodeObj.audio} showSkipControls />;
+    return (
+      <AudioPlayer
+        src={this.state.episodeObj.audio}
+        showSkipControls
+        onPause={this.runTime}
+      />
+    );
   };
+
   render() {
     return this.state.episodeObj ? (
       <div>
         <img src={this.state.episodeObj.image} alt="" />
-        {this.state.episodeObj.description}
         <br />
         {convertSecondsToDisplay(this.state.episodeObj.audio_length_sec)}
+        {parse(
+          this.state.episodeObj.description
+            ? this.state.episodeObj.description
+            : "loading"
+        )}
         {this.Player()}
       </div>
     ) : null;
