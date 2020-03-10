@@ -10,7 +10,7 @@ class ListenedEpisode {
   }
 
   getById = episodeID => {
-    return this.listenedEpisode.get("/", { episodeID: episodeID });
+    return this.listenedEpisode.get(`/${episodeID}`);
   };
 
   setNewListenedEpisode = episodeID => {

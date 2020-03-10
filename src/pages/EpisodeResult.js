@@ -28,22 +28,31 @@ export default class EpisodeResult extends Component {
         console.log("err", err);
       });
   }
+
+  handlePlay = e => {
+    const id = this.state.id;
+    listenedEpisodeServices
+      .getById(id)
+      .then(result => {
+        console.log("result :", result);
+        if (result.data.length === 0) this.saveToUser();
+        else {
+          console.log("result :", result);
+          const progress = result.data.progress;
+          e.audio.currentTime = progress;
+        }
+      })
+      .catch(err => {});
+  };
   saveToUser = () => {
     listenedEpisodeServices.setNewListenedEpisode(this.state.id);
   };
+
   updateProgress = e => {
     listenedEpisodeServices.setEpisodeProgress(
       this.state.id,
       e.target.currentTime
     );
-    authService
-      .me()
-      .then(result => {
-        console.log("result :", result);
-      })
-      .catch(err => {
-        console.log("err :", err);
-      });
   };
 
   Player = () => {
@@ -51,7 +60,7 @@ export default class EpisodeResult extends Component {
       <AudioPlayer
         src={this.state.episodeObj.audio}
         showSkipControls
-        onPlay={this.saveToUser}
+        onPlay={this.handlePlay}
         onPause={this.updateProgress}
       />
     );
