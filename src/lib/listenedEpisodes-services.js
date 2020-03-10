@@ -9,12 +9,12 @@ class ListenedEpisode {
     });
   }
 
-  setNewListenedEpisode = async episodeID => {
-    return await this.listenedEpisode.post("/", { episodeID: episodeID });
+  setNewListenedEpisode = episodeID => {
+    return this.listenedEpisode.post("/", { episodeID: episodeID });
   };
 
-  setEpisodeProgress = async (episodeID, progress) => {
-    return await this.listenedEpisode.put(`/`, {
+  setEpisodeProgress = (episodeID, progress) => {
+    return this.listenedEpisode.put(`/`, {
       progress: progress,
       id: episodeID
     });
