@@ -9,6 +9,7 @@ import Private from "./pages/Private";
 import Index from "./pages/Index";
 import PodcastResult from "./pages/PodcastResult";
 import EpisodeResult from "./pages/EpisodeResult";
+import RandomEpisode from "./pages/RandomEpisode";
 import Profile from "./pages/Profile";
 
 import AnonRoute from "./components/AnonRoute";
@@ -32,7 +33,8 @@ class App extends Component {
             component={PodcastResult}
           />
           <PrivateRoute exact path="/episode/:id" component={EpisodeResult} />
-          <PrivateRoute exact path = '/profile' component = {Profile}/>
+          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/randomEpisode" component={RandomEpisode} />
         </Switch>
       </div>
     );

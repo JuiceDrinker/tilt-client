@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Search from "./../components/Search";
 import Results from "./../components/Results";
 import API from "./../lib/api-services";
+import { Link } from "react-router-dom";
 export default class Index extends Component {
   constructor() {
     super();
@@ -30,6 +31,9 @@ export default class Index extends Component {
     return (
       <div>
         <Search returnData={this.getSearchData} />
+        <Link to="/randomEpisode">
+          <button> Get Random Episode </button>
+        </Link>
         <Results data={this.state.searchData} />
       </div>
     );

@@ -6,13 +6,20 @@ import { convertSecondsToDisplay } from "./../lib/helpers";
 import parse from "html-react-parser";
 import listenedEpisodeServices from "./../lib/listenedEpisodes-services";
 import authService from "./../lib/auth-service";
-export default class EpisodeResult extends Component {
+import { Redirect } from "react-router";
+import { withRouter } from "react-router-dom";
+class EpisodeResult extends Component {
   state = {
     id: null,
-    episodeObj: {}
+    episodeObj: {},
+    nextEpID: null
   };
 
   componentDidMount() {
+    this.getCurrentEp();
+  }
+
+  getCurrentEp = () => {
     const { id } = this.props.match.params;
     this.setState((state, props) => {
       return { id: id };
@@ -26,8 +33,34 @@ export default class EpisodeResult extends Component {
       .catch(err => {
         console.log("err", err);
       });
-  }
+  };
+  getNextEpID = () => {
+    const podcastID = this.state.episodeObj.podcast.id;
+    const episodeID = this.state.id;
+    let nextEpisodeID = null;
+    API.getOnePodcast(podcastID)
+      .then(podcastObj => {
+        podcastObj.data.episodes.forEach((episode, index) => {
+          console.log(episode.id);
+          if (episode.id === episodeID) {
+            nextEpisodeID = podcastObj.data.episodes[index + 1].id;
+          }
+        });
+        console.log("nextEpisodeID", nextEpisodeID);
+        this.handleNext(nextEpisodeID); //ID
+      })
+      .catch(err => {
+        console.log("err :", err);
+      });
+  };
 
+  handleNext = nextEpID => {
+    console.log("nextEpID :", nextEpID); //Undefined
+    if (nextEpID) {
+      this.props.history.push(`${nextEpID}`);
+      this.getCurrentEp();
+    } else return;
+  };
   handlePlay = e => {
     const id = this.state.id;
     listenedEpisodeServices
@@ -59,6 +92,7 @@ export default class EpisodeResult extends Component {
       <AudioPlayer
         src={this.state.episodeObj.audio}
         showSkipControls
+        onClickNext={this.getNextEpID}
         onPlay={this.handlePlay}
         onPause={this.updateProgress}
       />
@@ -81,3 +115,5 @@ export default class EpisodeResult extends Component {
     ) : null;
   }
 }
+
+export default withRouter(EpisodeResult);
