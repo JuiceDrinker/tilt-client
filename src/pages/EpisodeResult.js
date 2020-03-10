@@ -20,11 +20,14 @@ class EpisodeResult extends Component {
   }
 
   getCurrentEp = () => {
-    const { id } = this.props.match.params;
+    let { id } = this.props.match.params;
+    if (id === undefined) {
+      id = this.props.episodeId;
+      console.log("this.state.id :", this.props);
+    }
     this.setState((state, props) => {
       return { id: id };
     });
-
     API.getOneEpisode(id)
       .then(result => {
         const episode = result.data;
@@ -57,8 +60,8 @@ class EpisodeResult extends Component {
   handleNext = nextEpID => {
     console.log("nextEpID :", nextEpID); //Undefined
     if (nextEpID) {
-      this.props.history.push(`${nextEpID}`);
       this.getCurrentEp();
+      this.props.history.push(`/episode/${nextEpID}`);
     } else return;
   };
   handlePlay = e => {
@@ -100,6 +103,7 @@ class EpisodeResult extends Component {
   };
 
   render() {
+    console.log("this.state :", this.state);
     return this.state.episodeObj ? (
       <div>
         <img src={this.state.episodeObj.image} alt="" />
