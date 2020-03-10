@@ -18,6 +18,9 @@ class EpisodeResult extends Component {
   componentDidMount() {
     this.getCurrentEp();
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.episodeId !== this.props.episodeId) this.getCurrentEp();
+  }
 
   getCurrentEp = () => {
     let { id } = this.props.match.params;

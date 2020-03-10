@@ -26,10 +26,9 @@ class RandomEpisode extends Component {
   render() {
     return this.state.id ? (
       <div>
-        <EpisodeResult episodeId={this.state.id} />
+        <EpisodeResult episodeId={this.state.id}  />
         <button onClick={this.getRandomEpisodeID}>
-          {" "}
-          Get Another Random Episode{" "}
+          Get Another Random Episode
         </button>
       </div>
     ) : null;

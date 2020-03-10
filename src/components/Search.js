@@ -69,11 +69,16 @@ export default class Search extends Component {
       this.setState({ sortByDate: false });
     else if (e.target.innerText === "Date") this.setState({ sortByDate: true });
   };
-
+  handleSuggestClick = e => {
+    e.preventDefault();
+    this.setState({ suggestedPodcasts: [] });
+    this.handleSubmit(e);
+  };
   render() {
     return (
       <div>
         <input
+          autocomplete="off"
           type="text"
           name="searchBar"
           value={this.state.searchQuery}
@@ -85,7 +90,7 @@ export default class Search extends Component {
           <div className="dropdown">
             <div className="dropdown-content-search ">
               {this.state.suggestedPodcasts.map(x => {
-                return <h1>{x}</h1>;
+                return <h1 onClick={this.handleSuggestClick}>{x}</h1>;
               })}
             </div>
           </div>
