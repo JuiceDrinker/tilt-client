@@ -22,7 +22,6 @@ export default class EpisodeResult extends Component {
       .then(result => {
         const episode = result.data;
         this.setState({ episodeObj: episode });
-        console.log("episode", episode.audio);
       })
       .catch(err => {
         console.log("err", err);
@@ -34,15 +33,15 @@ export default class EpisodeResult extends Component {
     listenedEpisodeServices
       .getById(id)
       .then(result => {
-        const progress = result.data[0].progress;
-        console.log("progress :", progress);
-        if (result.data[0].length === 0) this.saveToUser();
-        else {
-          e.target.currentTime = progress;
-          console.log("progress :", progress);
+        if (result.data.length === 0) {
+          this.saveToUser();
+        } else {
+          e.target.currentTime = result.data[0].progress;
         }
       })
-      .catch(err => {});
+      .catch(err => {
+        console.log("err", err);
+      });
   };
   saveToUser = () => {
     listenedEpisodeServices.setNewListenedEpisode(this.state.id);
@@ -53,14 +52,6 @@ export default class EpisodeResult extends Component {
       this.state.id,
       e.target.currentTime
     );
-    listenedEpisodeServices
-      .getById(this.state.id)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(err => {
-        console.log("err :", err);
-      });
   };
 
   Player = () => {
