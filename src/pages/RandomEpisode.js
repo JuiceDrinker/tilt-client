@@ -1,7 +1,7 @@
 import EpisodeResult from "./EpisodeResult";
 import React, { Component } from "react";
 import APIservices from "../lib/api-services";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
 class RandomEpisode extends Component {
   state = {
@@ -16,7 +16,6 @@ class RandomEpisode extends Component {
     APIservices.getRandomEpisodeObj()
       .then(result => {
         const id = result.data.id;
-        console.log("result.data :", result.data);
         this.setState({ id: id });
       })
       .catch(err => {
@@ -28,7 +27,10 @@ class RandomEpisode extends Component {
     return this.state.id ? (
       <div>
         <EpisodeResult episodeId={this.state.id} />
-        <button>Get another random Episode</button>
+        <button onClick={this.getRandomEpisodeID}>
+          {" "}
+          Get Another Random Episode{" "}
+        </button>
       </div>
     ) : null;
   }

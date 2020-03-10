@@ -28,7 +28,7 @@ class API {
   };
 
   getTypeaheadResults = searchQuery => {
-    return this.api.get(`/typeahead/${searchQuery}`);
+      return this.api.get(`/typeahead/?q=${searchQuery}`);
   };
 
   getOnePodcast = podcastID => {

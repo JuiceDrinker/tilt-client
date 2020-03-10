@@ -5,7 +5,11 @@ export default class Search extends Component {
     searchQuery: "",
     type: "podcast",
     sortByDate: false,
-    type: ""
+    title: true,
+    description: false,
+    type: "",
+    genres: [],
+    suggestedPodcasts: []
     // includedGenres: [23 ,62 ,34],
   };
 
@@ -19,6 +23,14 @@ export default class Search extends Component {
     this.setState((state, props) => {
       return { searchQuery: newVal };
     });
+    API.getTypeaheadResults(newVal)
+      .then(results => {
+        const suggestedPodcasts = results.data.terms.map(x => x);
+        this.setState({ suggestedPodcasts: suggestedPodcasts });
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
   };
 
   handleSortByDate = e => {
@@ -26,19 +38,36 @@ export default class Search extends Component {
     this.setState({ sortByDate: newSortByDate });
   };
 
-  //   handleGenres = e => {};
+  //   handleGenres = e => {}; TODO:
 
   handleSubmit = e => {
     e.preventDefault();
     const formQuery = this.state.searchQuery
       .replace(" ", "%20")
-      .concat(`&type=${this.state.type}`);
+      .concat(`&type=${this.state.type}`)
+      .concat(`&sortbyDate=${this.state.sortByDate ? "1" : "0"}`)
+      .concat(`$only_in=
+      ${
+        this.state.title
+          ? "title"
+          : "" + this.state.description
+          ? "description"
+          : ""
+      }`);
+    console.log("formQuery :", formQuery);
     API.getSearchResults(formQuery)
       .then(results => results.data)
       .then(data => {
         this.setQueryResult(data);
       })
       .catch(err => console.log("err", err));
+  };
+
+  dropDownHandler = e => {
+    // e.preventDefault();
+    if (e.target.innerText === "Relevance")
+      this.setState({ sortByDate: false });
+    else if (e.target.innerText === "Date") this.setState({ sortByDate: true });
   };
 
   render() {
@@ -52,6 +81,28 @@ export default class Search extends Component {
           onChange={this.handleChange}
         />
         <button onClick={this.handleSubmit}>Search</button>
+        {this.state.suggestedPodcasts.length === 0 ? null : (
+          <div className="dropdown">
+            <div className="dropdown-content-search ">
+              {this.state.suggestedPodcasts.map(x => {
+                return <h1>{x}</h1>;
+              })}
+            </div>
+          </div>
+        )}
+        <div className="dropdown">
+          <button className="dropbtn">
+            {this.state.sortByDate ? "Sort by Date" : "Sort By Relevance"}
+          </button>
+          <div className="dropdown-content">
+            <a href="" onClick={this.dropDownHandler}>
+              Relevance
+            </a>
+            <a href="" onClick={this.dropDownHandler}>
+              Date
+            </a>
+          </div>
+        </div>
       </div>
     );
   }
