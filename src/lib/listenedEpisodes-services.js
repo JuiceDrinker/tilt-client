@@ -9,6 +9,10 @@ class ListenedEpisode {
     });
   }
 
+  getById = episodeID => {
+    return this.listenedEpisode.get("/", { episodeID: episodeID });
+  };
+
   setNewListenedEpisode = episodeID => {
     return this.listenedEpisode.post("/", { episodeID: episodeID });
   };
