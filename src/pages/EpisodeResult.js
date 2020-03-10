@@ -34,12 +34,12 @@ export default class EpisodeResult extends Component {
     listenedEpisodeServices
       .getById(id)
       .then(result => {
-        console.log("result :", result);
-        if (result.data.length === 0) this.saveToUser();
+        const progress = result.data[0].progress;
+        console.log("progress :", progress);
+        if (result.data[0].length === 0) this.saveToUser();
         else {
-          console.log("result :", result);
-          const progress = result.data.progress;
-          e.audio.currentTime = progress;
+          e.target.currentTime = progress;
+          console.log("progress :", progress);
         }
       })
       .catch(err => {});
@@ -53,6 +53,14 @@ export default class EpisodeResult extends Component {
       this.state.id,
       e.target.currentTime
     );
+    listenedEpisodeServices
+      .getById(this.state.id)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log("err :", err);
+      });
   };
 
   Player = () => {
