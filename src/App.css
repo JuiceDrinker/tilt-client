@@ -147,13 +147,23 @@ table {
 }
 
 .searchbar {
-  flex: 1;
-  width: 40%;
+  width: 80%;
   background: white;
 }
 
-.search-container{
+.search-container {
   display: flex;
   flex-direction: row;
-  
+  align-items: center;
+}
+
+.card-image {
+  margin: 0 auto;
+}
+
+.shadow {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-bottom: 1px solid black;
+  margin: 20px;
+  margin-top: 0;
 }

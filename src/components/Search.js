@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SortDropDown from "./../components/SortDropdown";
 import API from "./../lib/api-services";
-import Textfield from "@material-ui/core/TextField";
+import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 export default class Search extends Component {
   state = {
@@ -79,10 +79,10 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div className="search-container">
-        <Textfield
+      <div className="search-container" width="100%">
+        <InputBase
           id="filled-basic"
-          label="Search for your favourite podcasts"
+          placeholder="Search "
           autoComplete="off"
           type="text"
           name="searchBar"

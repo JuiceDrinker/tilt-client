@@ -6,11 +6,15 @@ import { convertSecondsToDisplay } from "./../lib/helpers";
 import parse from "html-react-parser";
 import listenedEpisodeServices from "./../lib/listenedEpisodes-services";
 import { withRouter } from "react-router-dom";
-import { Media } from "reactstrap";
+import { CardContent } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardMedia from "@material-ui/core/CardMedia";
 class EpisodeResult extends Component {
   state = {
     id: null,
-    episodeObj: {},
+    episodeObj: null,
     nextEpID: null
   };
 
@@ -107,17 +111,32 @@ class EpisodeResult extends Component {
   render() {
     console.log("this.state :", this.state);
     return this.state.episodeObj ? (
-      <Media>
-        <img src={this.state.episodeObj.image} alt="" />
-        <br />
-        {convertSecondsToDisplay(this.state.episodeObj.audio_length_sec)}
-        {parse(
-          this.state.episodeObj.description
-            ? this.state.episodeObj.description
-            : "loading"
-        )}
+      <div>
+        <Card className="shadow">
+          <CardActionArea>
+            <CardMedia title={parse(this.state.episodeObj.title)}>
+              <img
+                src={this.state.episodeObj.image}
+                alt=""
+                height="300"
+                width="300"
+                className="card-image"
+              />
+            </CardMedia>
+            <CardContent>
+              {convertSecondsToDisplay(this.state.episodeObj.audio_length_sec)}
+              {parse(
+                this.state.episodeObj.description
+                  ? this.state.episodeObj.description
+                      .substring(0, 320)
+                      .concat("...")
+                  : "loading"
+              )}
+            </CardContent>
+          </CardActionArea>
+        </Card>
         {this.Player()}
-      </Media>
+      </div>
     ) : null;
   }
 }

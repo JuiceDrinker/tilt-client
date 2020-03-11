@@ -12,10 +12,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const SortDropdown = props => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggle = () => setDropdownOpen(prevState => !prevState);
-
   return (
     <div>
       <InputLabel id="demo-simple-select-label"></InputLabel>
@@ -23,6 +19,7 @@ const SortDropdown = props => {
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         onClick={props.dropDownHandler}
+        value={props.sortBydate ? "Sort By Date" : "Sort by Relevance"}
       >
         <MenuItem value={10}>Relevance</MenuItem>
         <MenuItem value={20}>Date</MenuItem>

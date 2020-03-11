@@ -1,14 +1,12 @@
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button
-} from "reactstrap";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 import parse from "html-react-parser";
 
@@ -34,36 +32,38 @@ export default class Recommended extends Component {
     return (
       <div>
         {this.state.dataToRender.map(podcastObj => {
-          console.log("podcast", podcastObj);
           return (
-            <Card>
-              <CardImg
-                top
-                width="100%"
-                src={podcastObj.image}
-                height="414px"
-                alt="Card image cap"
-              />
-              <CardBody style={{ border: "1px solid black", padding: "20px" }}>
-                <CardTitle>
-                  {parse(podcastObj.title_highlighted || podcastObj.title)}
-                </CardTitle>
-                <CardSubtitle>
-                  Total episodes: {podcastObj.total_episodes}
-                </CardSubtitle>
-                <CardText>
-                  {parse(
-                    podcastObj.description || podcastObj.description_original
-                  )}
-                </CardText>
-                <Link
-                  key={`${podcastObj.id}`}
-                  to={`/podcastResult/${podcastObj.id}`}
-                >
-                  <Button>Check it out!</Button>
-                </Link>
-              </CardBody>
-            </Card>
+            <Link
+              key={`${podcastObj.id}`}
+              to={`/podcastResult/${podcastObj.id}`}
+            >
+              <Card className="shadow">
+                <CardActionArea>
+                  <CardMedia
+                    title={parse(
+                      podcastObj.title_highlighted || podcastObj.title
+                    )}
+                  >
+                    <img
+                      src={podcastObj.image}
+                      height="300"
+                      width="300"
+                      alt=""
+                      srcset=""
+                      className="card-image"
+                    />
+                  </CardMedia>
+                  <CardContent>
+                    {parse(
+                      podcastObj.description.substring(0, 200).concat("...") ||
+                        podcastObj.description_original
+                          .substring(0, 200)
+                          .concat("...")
+                    )}
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Link>
           );
         })}
       </div>
