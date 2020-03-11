@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import SortDropDown from "./../components/SortDropdown";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import API from "./../lib/api-services";
+import Textfield from "@material-ui/core/TextField";
+import SearchIcon from "@material-ui/icons/Search";
 export default class Search extends Component {
   state = {
     searchQuery: "",
@@ -78,21 +79,17 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div>
-        <Form>
-          <FormGroup>
-            <Label>Search:</Label>
-            <Input
-              autoComplete="off"
-              type="text"
-              name="searchBar"
-              value={this.state.searchQuery}
-              placeholder="Search for your favourite podcasts"
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <Button onClick={this.handleSubmit}>Search</Button>
-        </Form>
+      <div className="search-container">
+        <Textfield
+          id="filled-basic"
+          label="Search for your favourite podcasts"
+          autoComplete="off"
+          type="text"
+          name="searchBar"
+          value={this.state.searchQuery}
+          onChange={this.handleChange}
+        />
+        <SearchIcon onClick={this.handleSubmit} />
 
         {this.state.suggestedPodcasts.length === 0 ? null : (
           <div className="dropdown">

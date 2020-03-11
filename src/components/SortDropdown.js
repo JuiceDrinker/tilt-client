@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+
 import {
   Dropdown,
   DropdownToggle,
@@ -13,17 +17,17 @@ const SortDropdown = props => {
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle caret>
-        {props.sortState ? "Sort by Date" : "Sort By Relevance"}
-      </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem header>Sort by: </DropdownItem>
-        <DropdownItem onClick={props.dropDownHandler}>Relevance </DropdownItem>
-        <DropdownItem divider />
-        <DropdownItem onClick={props.dropDownHandler}>Date</DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
+    <div>
+      <InputLabel id="demo-simple-select-label"></InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        onClick={props.dropDownHandler}
+      >
+        <MenuItem value={10}>Relevance</MenuItem>
+        <MenuItem value={20}>Date</MenuItem>
+      </Select>
+    </div>
   );
 };
 

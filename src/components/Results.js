@@ -34,6 +34,7 @@ export default class Recommended extends Component {
     return (
       <div>
         {this.state.dataToRender.map(podcastObj => {
+          console.log("podcast", podcastObj);
           return (
             <Card>
               <CardImg
@@ -44,13 +45,15 @@ export default class Recommended extends Component {
                 alt="Card image cap"
               />
               <CardBody style={{ border: "1px solid black", padding: "20px" }}>
-                <CardTitle>{podcastObj.title_highlighted}</CardTitle>
+                <CardTitle>
+                  {parse(podcastObj.title_highlighted || podcastObj.title)}
+                </CardTitle>
                 <CardSubtitle>
                   Total episodes: {podcastObj.total_episodes}
                 </CardSubtitle>
                 <CardText>
                   {parse(
-                    podcastObj.description.substring(0, 200).concat("...")
+                    podcastObj.description || podcastObj.description_original
                   )}
                 </CardText>
                 <Link

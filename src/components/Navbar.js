@@ -22,6 +22,9 @@ function NavbarComponent(props) {
           fontSize="large"
           onClick={() => handleBack(props)}
         />
+        <div>
+          <img src={logo} alt="" width="300" height="48px" className="logo" />
+        </div>
         {isLoggedIn ? (
           <>
             <Link className="nav-links">
