@@ -108,11 +108,15 @@ class EpisodeResult extends Component {
     );
   };
 
+  newRandom = () => {
+    if (this.props.reload) this.props.reload();
+    else return;
+  };
   render() {
     console.log("this.state :", this.state);
     return this.state.episodeObj ? (
       <div>
-        <Card className="shadow">
+        <Card className="shadow" onClick={this.newRandom}>
           <CardActionArea>
             <CardMedia title={parse(this.state.episodeObj.title)}>
               <img
