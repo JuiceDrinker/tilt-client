@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const SortDropdown = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -18,7 +19,7 @@ const SortDropdown = props => {
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem header>Sort by: </DropdownItem>
-        <DropdownItem onClick={props.dropDownHandler}>Relevance</DropdownItem>
+        <DropdownItem onClick={props.dropDownHandler}>Relevance </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={props.dropDownHandler}>Date</DropdownItem>
       </DropdownMenu>

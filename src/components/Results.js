@@ -49,7 +49,9 @@ export default class Recommended extends Component {
                   Total episodes: {podcastObj.total_episodes}
                 </CardSubtitle>
                 <CardText>
-                  {parse(podcastObj.description.substring(0, 200))}
+                  {parse(
+                    podcastObj.description.substring(0, 200).concat("...")
+                  )}
                 </CardText>
                 <Link
                   key={`${podcastObj.id}`}

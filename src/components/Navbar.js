@@ -1,70 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "./../lib/Auth";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
-
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import logo from "./../images/logo.png";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 function NavbarComponent(props) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-  const { logout, isLoggedIn } = props;
-
-  const [collapsed, setCollapsed] = useState(true);
-
-  const toggleNavbar = () => setCollapsed(!collapsed);
+  const { user, logout, isLoggedIn, classes, history } = props;
+  const handleBack = props => {
+    console.log(props);
+    props.history.push("/");
+  };
   return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/" className="mr-auto">
-          Logo PlaceHolder
-        </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
-            <NavItem>
-              <Link to={"/"} id="home-btn">
-                <h4>Home</h4>
-              </Link>
-            </NavItem>
-            <NavItem>
-              {isLoggedIn ? (
-                <>
-                  <Link to="/profile">Profile</Link>
-                  <NavItem onClick={logout}>
-                    <h4> Logout</h4>
-                  </NavItem>
-                </>
-              ) : (
-                <>
-                  <NavItem className="navbar-button">
-                    <Link to="/login">
-                      <h4>Login</h4>
-                    </Link>
-                  </NavItem>{" "}
-                  <NavItem className="navbar-button">
-                    <Link to="/signup">
-                      <h4>Sign Up</h4>
-                    </Link>
-                  </NavItem>
-                </>
-              )}
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+    <AppBar position="sticky">
+      <div className="nav-bar">
+        <KeyboardBackspaceIcon
+          className="power-icon"
+          fontSize="large"
+          onClick={() => handleBack(props)}
+        />
+        {isLoggedIn ? (
+          <>
+            <Link className="nav-links">
+              <PowerSettingsNewIcon fontSize="large" className="power-icon" />
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/login">
+              <h4>Login</h4>
+            </Link>
+            <Link to="/signup">
+              <h4>Sign Up</h4>
+            </Link>
+          </>
+        )}
+      </div>
+    </AppBar>
   );
 }
 
