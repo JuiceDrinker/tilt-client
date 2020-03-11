@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import SortDropDown from "./../components/SortDropdown";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import API from "./../lib/api-services";
 export default class Search extends Component {
   state = {
@@ -22,7 +24,7 @@ export default class Search extends Component {
     this.setState((state, props) => {
       return { searchQuery: newVal };
     });
-    API.getTypeaheadResults(newVal)
+    API.getTypeaheadResults(newVal.toLowerCase())
       .then(results => {
         const suggestedPodcasts = results.data.terms.map(x => x);
         this.setState({ suggestedPodcasts: suggestedPodcasts });
@@ -73,18 +75,25 @@ export default class Search extends Component {
     this.setState({ suggestedPodcasts: [] });
     this.handleSubmit(e);
   };
+
   render() {
     return (
       <div>
-        <input
-          autoComplete="off"
-          type="text"
-          name="searchBar"
-          value={this.state.searchQuery}
-          placeholder="Search for your favourite podcasts"
-          onChange={this.handleChange}
-        />
-        <button onClick={this.handleSubmit}>Search</button>
+        <Form>
+          <FormGroup>
+            <Label>Search:</Label>
+            <Input
+              autoComplete="off"
+              type="text"
+              name="searchBar"
+              value={this.state.searchQuery}
+              placeholder="Search for your favourite podcasts"
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <Button onClick={this.handleSubmit}>Search</Button>
+        </Form>
+
         {this.state.suggestedPodcasts.length === 0 ? null : (
           <div className="dropdown">
             <div className="dropdown-content-search ">
@@ -98,15 +107,10 @@ export default class Search extends Component {
             </div>
           </div>
         )}
-        <div className="dropdown">
-          <button className="dropbtn">
-            {this.state.sortByDate ? "Sort by Date" : "Sort By Relevance"}
-          </button>
-          <div className="dropdown-content">
-            <button onClick={this.dropDownHandler}>Relevance</button>
-            <button onClick={this.dropDownHandler}>Date</button>
-          </div>
-        </div>
+        <SortDropDown
+          sortState={this.state.sortByDate}
+          dropDownHandler={this.dropDownHandler}
+        />
       </div>
     );
   }
