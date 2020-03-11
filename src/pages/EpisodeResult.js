@@ -6,6 +6,7 @@ import { convertSecondsToDisplay } from "./../lib/helpers";
 import parse from "html-react-parser";
 import listenedEpisodeServices from "./../lib/listenedEpisodes-services";
 import { withRouter } from "react-router-dom";
+import { Media } from "reactstrap";
 class EpisodeResult extends Component {
   state = {
     id: null,
@@ -106,7 +107,7 @@ class EpisodeResult extends Component {
   render() {
     console.log("this.state :", this.state);
     return this.state.episodeObj ? (
-      <div>
+      <Media>
         <img src={this.state.episodeObj.image} alt="" />
         <br />
         {convertSecondsToDisplay(this.state.episodeObj.audio_length_sec)}
@@ -116,7 +117,7 @@ class EpisodeResult extends Component {
             : "loading"
         )}
         {this.Player()}
-      </div>
+      </Media>
     ) : null;
   }
 }

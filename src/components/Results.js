@@ -40,6 +40,7 @@ export default class Recommended extends Component {
                 top
                 width="100%"
                 src={podcastObj.image}
+                height="414px"
                 alt="Card image cap"
               />
               <CardBody style={{ border: "1px solid black", padding: "20px" }}>
