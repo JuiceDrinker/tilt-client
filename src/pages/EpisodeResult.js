@@ -1,12 +1,10 @@
-import React, { Component, cloneElement } from "react";
+import React, { Component } from "react";
 import API from "./../lib/api-services";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { convertSecondsToDisplay } from "./../lib/helpers";
 import parse from "html-react-parser";
 import listenedEpisodeServices from "./../lib/listenedEpisodes-services";
-import authService from "./../lib/auth-service";
-import { Redirect } from "react-router";
 import { withRouter } from "react-router-dom";
 class EpisodeResult extends Component {
   state = {

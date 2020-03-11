@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import { Switch } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+import NavbarComponent from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Private from "./pages/Private";
 import Index from "./pages/Index";
 import PodcastResult from "./pages/PodcastResult";
 import EpisodeResult from "./pages/EpisodeResult";
@@ -21,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Navbar />
+        <NavbarComponent />
 
         <Switch>
           <AnonRoute exact path="/signup" component={Signup} />

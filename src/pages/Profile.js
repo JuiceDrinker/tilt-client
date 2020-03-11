@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import API from "../lib/api-services";
 import authService from "../lib/auth-service";
 
 export default class Profile extends Component {

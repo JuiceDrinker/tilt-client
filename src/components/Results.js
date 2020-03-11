@@ -1,5 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button
+} from "reactstrap";
+
+import parse from "html-react-parser";
+
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
@@ -23,12 +35,29 @@ export default class Recommended extends Component {
       <div>
         {this.state.dataToRender.map(podcastObj => {
           return (
-            <Link
-              key={`${podcastObj.id}`}
-              to={`/podcastResult/${podcastObj.id}`}
-            >
-              <img src={podcastObj.image} alt="" width="200" height="200" />
-            </Link>
+            <Card>
+              <CardImg
+                top
+                width="100%"
+                src={podcastObj.image}
+                alt="Card image cap"
+              />
+              <CardBody style={{ border: "1px solid black", padding: "20px" }}>
+                <CardTitle>{podcastObj.title_highlighted}</CardTitle>
+                <CardSubtitle>
+                  Total episodes: {podcastObj.total_episodes}
+                </CardSubtitle>
+                <CardText>
+                  {parse(podcastObj.description.substring(0, 200))}
+                </CardText>
+                <Link
+                  key={`${podcastObj.id}`}
+                  to={`/podcastResult/${podcastObj.id}`}
+                >
+                  <Button>Check it out!</Button>
+                </Link>
+              </CardBody>
+            </Card>
           );
         })}
       </div>

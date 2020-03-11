@@ -7,7 +7,6 @@ export default class Search extends Component {
     sortByDate: false,
     title: true,
     description: false,
-    type: "",
     genres: [],
     suggestedPodcasts: []
     // includedGenres: [23 ,62 ,34],
@@ -78,7 +77,7 @@ export default class Search extends Component {
     return (
       <div>
         <input
-          autocomplete="off"
+          autoComplete="off"
           type="text"
           name="searchBar"
           value={this.state.searchQuery}
@@ -89,8 +88,12 @@ export default class Search extends Component {
         {this.state.suggestedPodcasts.length === 0 ? null : (
           <div className="dropdown">
             <div className="dropdown-content-search ">
-              {this.state.suggestedPodcasts.map(x => {
-                return <h1 onClick={this.handleSuggestClick}>{x}</h1>;
+              {this.state.suggestedPodcasts.map((x, i) => {
+                return (
+                  <h1 key={i} onClick={this.handleSuggestClick}>
+                    {x}
+                  </h1>
+                );
               })}
             </div>
           </div>
@@ -100,12 +103,8 @@ export default class Search extends Component {
             {this.state.sortByDate ? "Sort by Date" : "Sort By Relevance"}
           </button>
           <div className="dropdown-content">
-            <a href="" onClick={this.dropDownHandler}>
-              Relevance
-            </a>
-            <a href="" onClick={this.dropDownHandler}>
-              Date
-            </a>
+            <button onClick={this.dropDownHandler}>Relevance</button>
+            <button onClick={this.dropDownHandler}>Date</button>
           </div>
         </div>
       </div>
