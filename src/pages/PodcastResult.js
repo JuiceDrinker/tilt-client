@@ -26,12 +26,11 @@ export default class PodcastResult extends Component {
     return (
       <div>
         <h1>{this.state.podcastObj.title}</h1>
-        <img src={this.state.podcastObj.thumbnail} alt="" />
-        {parse(
+        {/* {parse(
           this.state.podcastObj.description
             ? this.state.podcastObj.description
             : "loading"
-        )}
+        )} */}
         {this.state.podcastObj.episodes
           ? this.state.podcastObj.episodes.map(e => {
               return <Episodes episodeObj={e} key={e.id} />;

@@ -37,7 +37,7 @@ export default class Recommended extends Component {
               key={`${podcastObj.id}`}
               to={`/podcastResult/${podcastObj.id}`}
             >
-              <Card className="shadow">
+              <Card border-bottom={1} box-shadow={1} className="shadow">
                 <CardActionArea>
                   <CardMedia
                     title={parse(
