@@ -23,7 +23,7 @@ export default class Episodes extends Component {
     return this.state.episodeObj ? (
       <div>
         <Link to={`/episode/${this.state.episodeObj.id}`}>
-          <Card className="shadow">
+          <Card className="shadow margin-top">
             <CardActionArea>
               <CardMedia title={this.state.runTime || null}>
                 <img

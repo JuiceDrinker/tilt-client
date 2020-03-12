@@ -27,15 +27,11 @@ export default class Index extends Component {
       });
   }
 
-
-
   render() {
     return (
       <div>
         <Search returnData={this.getSearchData} />
-        <Link to="/randomEpisode">
-          <button> Get Random Episode </button>
-        </Link>
+
         <Results data={this.state.searchData} />
       </div>
     );

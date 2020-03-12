@@ -23,7 +23,9 @@ function NavbarComponent(props) {
           onClick={() => handleBack(props)}
         />
         <div>
-          <img src={logo} alt="" width="300" height="48px" className="logo" />
+          <Link to="/randomEpisode">
+            <img src={logo} alt="" width="300" height="48px" className="logo" />
+          </Link>
         </div>
         {isLoggedIn ? (
           <>

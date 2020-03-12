@@ -44,6 +44,7 @@ export default class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    if (this.state.searchQuery.length === 0) return;
     const formQuery = this.state.searchQuery
       .replace(" ", "%20")
       .concat(`&type=${this.state.type}`)

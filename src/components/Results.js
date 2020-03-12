@@ -32,6 +32,7 @@ export default class Recommended extends Component {
     return (
       <div>
         {this.state.dataToRender.map(podcastObj => {
+          if (podcastObj.description === undefined) console.log(podcastObj);
           return (
             <Link
               key={`${podcastObj.id}`}
@@ -48,17 +49,17 @@ export default class Recommended extends Component {
                       src={podcastObj.image}
                       height="300"
                       width="300"
-                      alt=""
+                      alt="" 
                       srcset=""
                       className="card-image"
                     />
                   </CardMedia>
                   <CardContent>
                     {parse(
-                      podcastObj.description.substring(0, 200).concat("...") ||
-                        podcastObj.description_original
-                          .substring(0, 200)
-                          .concat("...")
+                      podcastObj
+                        ? podcastObj.description_highlighted ||
+                            podcastObj.description
+                        : ""
                     )}
                   </CardContent>
                 </CardActionArea>
