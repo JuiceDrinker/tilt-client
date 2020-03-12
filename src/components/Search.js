@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, cloneElement } from "react";
 import SortDropDown from "./../components/SortDropdown";
 import API from "./../lib/api-services";
 import InputBase from "@material-ui/core/InputBase";
+
 import SearchIcon from "@material-ui/icons/Search";
 export default class Search extends Component {
   state = {
@@ -74,41 +75,49 @@ export default class Search extends Component {
   };
   handleSuggestClick = e => {
     e.preventDefault();
-    this.setState({ suggestedPodcasts: [] });
-    this.handleSubmit(e);
+    this.setState({ suggestedPodcasts: [], searchQuery: e.target.innerText });
+    // this.handleSubmit(e);
+    API.getSearchResults(e.target.innerText)
+      .then(results => results.data)
+      .then(data => {
+        this.setQueryResult(data);
+      })
+      .catch(err => console.log("err", err));
   };
 
   render() {
     return (
-      <div className="search-container" width="100%">
-        <InputBase
-          id="filled-basic"
-          placeholder="Search "
-          autoComplete="off"
-          type="text"
-          name="searchBar"
-          value={this.state.searchQuery}
-          onChange={this.handleChange}
-        />
-        <SearchIcon onClick={this.handleSubmit} />
+      <div>
+        <div className="search-container" width="100%">
+          <InputBase
+            fullWidth="true"
+            id="filled-basic"
+            placeholder="Search "
+            autoComplete="off"
+            type="text"
+            name="searchBar"
+            value={this.state.searchQuery}
+            onChange={this.handleChange}
+          />
+          <SearchIcon onClick={this.handleSubmit} />
 
+          <SortDropDown
+            sortState={this.state.sortByDate}
+            dropDownHandler={this.dropDownHandler}
+          />
+          <br />
+        </div>
         {this.state.suggestedPodcasts.length === 0 ? null : (
           <div className="dropdown">
             <div className="dropdown-content-search ">
-              {this.state.suggestedPodcasts.map((x, i) => {
-                return (
-                  <h1 key={i} onClick={this.handleSuggestClick}>
-                    {x}
-                  </h1>
-                );
-              })}
+              <ul>
+                {this.state.suggestedPodcasts.map((x, i) => {
+                  return <li onClick={this.handleSuggestClick}>{x}</li>;
+                })}
+              </ul>
             </div>
           </div>
         )}
-        <SortDropDown
-          sortState={this.state.sortByDate}
-          dropDownHandler={this.dropDownHandler}
-        />
       </div>
     );
   }
