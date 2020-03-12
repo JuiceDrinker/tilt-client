@@ -29,7 +29,7 @@ function NavbarComponent(props) {
         </div>
         {isLoggedIn ? (
           <>
-            <Link className="nav-links">
+            <Link className="nav-links" onClick={props.logout}>
               <PowerSettingsNewIcon fontSize="large" className="power-icon" />
             </Link>
           </>
