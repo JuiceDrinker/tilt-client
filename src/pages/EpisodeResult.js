@@ -63,7 +63,34 @@ class EpisodeResult extends Component {
       });
   };
 
+  getPrevEpID = () => {
+    const podcastID = this.state.episodeObj.podcast.id;
+    const episodeID = this.state.id;
+    let prevEpisodeID = null;
+    API.getOnePodcast(podcastID)
+      .then(podcastObj => {
+        podcastObj.data.episodes.forEach((episode, index) => {
+          console.log(episode.id);
+          if (episode.id === episodeID) {
+            prevEpisodeID = podcastObj.data.episodes[index - 1].id;
+          }
+        });
+        this.handlePrev(prevEpisodeID); //ID
+      })
+      .catch(err => {
+        console.log("err :", err);
+      });
+  };
+
   handleNext = nextEpID => {
+    console.log("nextEpID :", nextEpID); //Undefined
+    if (nextEpID) {
+      this.getCurrentEp();
+      this.props.history.push(`/episode/${nextEpID}`);
+    } else return;
+  };
+
+  handlePrev = nextEpID => {
     console.log("nextEpID :", nextEpID); //Undefined
     if (nextEpID) {
       this.getCurrentEp();
@@ -102,6 +129,7 @@ class EpisodeResult extends Component {
         src={this.state.episodeObj.audio}
         showSkipControls
         onClickNext={this.getNextEpID}
+        onClickPrevious={this.getPrevEpID}
         onPlay={this.handlePlay}
         onPause={this.updateProgress}
       />

@@ -26,6 +26,7 @@ export default class Episodes extends Component {
           <Card className="shadow margin-top">
             <CardActionArea>
               <CardMedia title={this.state.runTime || null}>
+                <br />
                 <img
                   src={this.state.episodeObj.image}
                   height="300"
