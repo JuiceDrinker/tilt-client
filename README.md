@@ -37,15 +37,10 @@ An application to listen, follow and upload your favourite podcasts.
 ## React Router Routes (React App)
 
 | Path | Component | Permissions | Behavior |
-
 | ------------------------- | -------------------- | -------------------------- | ------------------------------------------------------------- |
-
 | `/` | SplashPage | public `<Route>` | Home page |
-
 | `/signup` | SignupPage | anon only `<AnonRoute>` | Signup form, link to login, navigate to homepage after signup |
-
 | `/login` | LoginPage | anon only `<AnonRoute>` | Login form, link to signup, navigate to homepage after login |
-
 | `/logout` | n/a | anon only `<AnonRoute>` | Navigate to homepage after logout, expire session |
 
 ## Components
@@ -129,23 +124,14 @@ progress:  {type:  String}  //Time in seconds watched
 ## API Endpoints (backend routes)
 
 | HTTP Method | URL | Request Body | Success status | Error Status | Description |
-
 | ----------- | ----------------------------- | ---------------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-
 | GET | `/auth/profile` | Saved session | 200 | 404 | Check if user is logged in and return profile page |
-
 | POST | `/auth/signup` | {name, email, password} | 201 | 404 | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-
 | POST | `/auth/login` | {username, password} | 200 | 401 | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
-
 | POST | `/auth/logout` | (empty) | 204 | 400 | Logs out the user |
-
 | GET | `/auth/me` | Saved Session | 200 | 404 | User can see their profile and listening history |
-
 | PUT | `/auth/me` | Saved Session | 200 | 404 | User can edit their profile/preferences/settings|
-
 | GET | `/auth/delete` | Saved Session | 200 | 404 | User can delete their account |
-
 | GET| `/auth/listened` | userID | 200 | 404 | Retrieve listened podcasts/episodes for a specific user |
 <br>
 
